@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-feb-2020 20:48:27 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Tablas.A" table="a" schema="public" optimistic-lock="version">
+        <id name="id" type="string">
+            <column name="id" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="40" />
+        </property>
+        <property name="codigo" type="string">
+            <column name="codigo" length="20" />
+        </property>
+        <set name="bs" table="b" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cliente" length="20" />
+            </key>
+            <one-to-many class="Tablas.B" />
+        </set>
+    </class>
+</hibernate-mapping>

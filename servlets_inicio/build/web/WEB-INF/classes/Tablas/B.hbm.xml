@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-feb-2020 20:48:27 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Tablas.B" table="b" schema="public" optimistic-lock="version">
+        <id name="numerot" type="int">
+            <column name="numerot" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="a" class="Tablas.A" fetch="select">
+            <column name="cliente" length="20" />
+        </many-to-one>
+        <many-to-one name="c" class="Tablas.C" fetch="select">
+            <column name="producto" length="30" />
+        </many-to-one>
+        <many-to-one name="d" class="Tablas.D" fetch="select">
+            <column name="lugar" />
+        </many-to-one>
+        <property name="cantidad" type="java.lang.Integer">
+            <column name="cantidad" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+    </class>
+</hibernate-mapping>
