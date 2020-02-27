@@ -6,106 +6,43 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Bienvenidos a la págian incial de JSP y Servlet</title>
+        <title>Servlet</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <link rel="Shortcut Icon" href="../imagenes/icono.png">
     </head>
     <body>
-        <h1>Servlet y JSP</h1>
-        <p> Esta es la <a href="http://www.iesmajuelo.com"> Web del IES "EL Majuelo"</a></p>
-        <p>Pusal <a href="ServletNombre?nombre=Tomas+Fernandez"> aquí</a> si eres Tomás</p>
-        <p> Si no eres Tomás, dime quien eres y pulsa enviar </p>
-        <p> Envio de datos por metodo Post</p>
-        <form action="ServletNombre" method="post" id="FormNombrePost" name="FormNombrePost">
-            <label for="nombre">Tu nombre: </label>
-            <input type="text" id="nombre" name="nombre" value="tu nombre aquí..."/>
-            <input type="submit" id="enviar" name="enviar" value="enviar" />
-        </form>
-        <p> Envio de datos por metodo Get</p>
-        <form action="ServletNombre" method="get" id="FormNombreGet" name="FormNombreGet">
-            <label for="nombre">Tu nombre: </label>
-            <input type="text" id="nombre" name="nombre" value="tu nombre aquí..."/>
-            <input type="submit" id="enviar" name="enviar" value="enviar" />
-        </form>
-        <p>Pusal <a href="ServletDatos"> aquí</a> para ver algunos datos red</p>
-        <p>Pusal <a href="ServletCabecera"> aquí</a> para las cabeceras </p>
-        
-        
-        <!-- 
-            INICIO
-        -->
-        <p>
-            <script> document.write(new Date().toLocaleDateString()); </script>
-        </p>
-        <p>
-            Autor: Volodymyr Molchkov Volkogon
-        </p>
-        <form action="ServletNombre" method="post" id="FormNombrePost" name="FormNombrePost">
-            <label for="nombre">Tu nombre: <input type="text" id="nombre" name="nombre" placeholder="tu nombre aquí..."/></label>
-            <label for="codigo">Codigo: <input type="text" id="codigo" name="codigo" placeholder="codigo..."/></label>
-            <input type="submit" id="enviar" name="enviar" value="enviar" />
-            <input type="hidden" name="Buscar" value="0">
-        </form>
-        <!-- 
-            Introducir Transaccion
-        private int number;
-    private String client;
-    private String product;
-    private int place;
-    private int amount;
-        fecha
-        estado
-        -->
-        <form action="ServletNombre" method="post" id="FormTransaccion" name="FormTransaccion">
-            <label for="place">Lugar de compra: <input type="text" id="place" name="place" placeholder="Lugar"/></label>
-            <label for="product">Producto: <input type="text" id="product" name="product" placeholder="Producto"/></label>
-            <label for="amount">Cantidad: <input type="text" id="amount" name="amount" placeholder="Cantidad"/></label>
-            <input type="submit" id="enviar" name="enviar" value="I" />
-            <input type="hidden" name="Buscar" value="0">
-        </form>
-        
-        
-        <!-- 
-            Modificar apartado
-            leer subsrting hasta final
-        -->
-        <form action="ServletNombre" method="post" id="ModificarTransaccion" name="ModificarTransaccion">
-            <input type="submit" id="enviar" name="enviar" value="M1" />
-        </form>
-        
-        <!-- 
-            Realizar reemplazo
-            Checked or not
-        -->
-        <form action="ServletNombre" method="post" id="ModificarTransaccion" name="ModificarTransaccion">
-            <label>Numero: ()</label>
-            <label>Cliente: ()</label>
-            <label for="place">Lugar de compra: <input type="text" id="place" name="place" placeholder="Lugar"/></label>
-            <label for="product">Producto: <input type="text" id="product" name="product" placeholder="Producto"/></label>
-            <label for="amount">Cantidad: <input type="text" id="amount" name="amount" placeholder="Cantidad"/></label>
-            <label for="fecha">Fecha: <input type="date" id="fecha" name="fecha"/></label>
-            <label>Estado:</label>
-            <label for="EstadoYes"><input type="radio" id="EstadoYes" name="estado" value="true" />Yes</label>
-            <label for="EstadoNo"><input type="radio" id="EstadoNo" name="estado" value="false" />No</label>
-            <input type="submit" id="enviar" name="enviar" value="R" />
-        </form>
-        <!-- 
-            Cambiar forma de buscar
-            Jqueary para copiar datos que se introdujeron de antemano?
-        -->
-        <form action="ServletNombre" method="post" id="Buscar" name="Buscar">
-            <input type="submit" id="enviar" name="enviar" value="B1" />
-        </form>
-        <!-- 
-            Hibernate operaciones
-        
-        -->
-        
-        
-        <!-- 
-            Modificar apartado
-            leer subsrting hasta final
-        -->
+        <div class="container-fluid">
+            <h1>Inicio</h1>
+            <!-- 
+                INICIO
+            -->
+            <p>
+                <script> document.write(new Date().toLocaleDateString()); </script>
+            </p>
+            <p>
+                Autor: Volodymyr Molchkov Volkogon
+            </p>
+            <form action="ServletFinal" method="post" id="FormNInicioPost" name="FormNInicioPost">
+                <label for="nombre">Tu nombre: <input type="text" id="nombre" name="nombre" placeholder="tu nombre aquí..."/></label><br>
+                <label for="codigo">Codigo: <input type="text" id="codigo" name="codigo" placeholder="codigo..."/></label><br>
+                <button type="submit">Enviar</button>
+                <input type="hidden" name="Format" value="Inicio">
+            </form>
+
+            <!-- 
+                Cambiar forma de buscar
+
+            <form action="ServletNombre" method="post" id="Buscar" name="Buscar">
+                <button type="submit">Modificar</button>
+                <input type="hidden" name="Format" value="B1">
+            </form>
+            -->
+        </div>
     </body>
 </html>
 
