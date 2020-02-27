@@ -72,38 +72,28 @@ public class Operacion {
     public static B conseguirModificable(int n, String cli){
         SessionFactory sessionF = NewHibernateUtil.getSessionFactory();
         Session session= sessionF.openSession();
-        String hql = "FROM B where A= '"+cli+"' and numerot = "+n;
+        String hql = "FROM B where cliente= '"+cli+"' and numerot = "+n;
         Query query = session.createQuery(hql);
-        List result = query.list();
+        List<B> result = (List<B>)query.list();
         session.close();
         if ((result == null) || (result.isEmpty())) {
             return null;
         } else {
-            B tra;
-            for (Iterator it = result.iterator(); it.hasNext();) {
-                tra = (B)it.next();
-                return tra;
-            }
+            return result.get(0);
         }
-        return null;
     }
     public static C conseguirC(String nomb){
         SessionFactory sessionF = NewHibernateUtil.getSessionFactory();
         Session session= sessionF.openSession();
         String hql = "FROM C where nombre= '"+nomb+"'";
         Query query = session.createQuery(hql);
-        List result = query.list();
+        List<C> result = (List<C>)query.list();
         session.close();
         if ((result == null) || (result.isEmpty())) {
             return null;
         } else {
-            C pro;
-            for (Iterator it = result.iterator(); it.hasNext();) {
-                pro = (C)it.next();
-                return pro;
-            }
+            return result.get(0);
         }
-        return null;
     }
     
     public static D conseguirD(int num){
@@ -111,49 +101,44 @@ public class Operacion {
         Session session= sessionF.openSession();
         String hql = "FROM D where numero="+num;
         Query query = session.createQuery(hql);
-        List result = query.list();
+        List<D> result = (List<D>)query.list();
         session.close();
         if ((result == null) || (result.isEmpty())) {
             return null;
         } else {
-            D lug;
-            for (Iterator it = result.iterator(); it.hasNext();) {
-                lug = (D)it.next();
-                return lug;
-            }
+            return result.get(0);
         }
-        return null;
     }
      
-    public static List listarC(){
+    public static List<C> listarC(){
         SessionFactory sessionF = NewHibernateUtil.getSessionFactory();
         Session session= sessionF.openSession();
         String hql = "FROM C";
         Query query = session.createQuery(hql);
-        List results = query.list();
+        List<C> results = (List<C>)query.list();
         session.close();
         return results;
     }
-    public static List listarD(){
+    public static List<D> listarD(){
         SessionFactory sessionF = NewHibernateUtil.getSessionFactory();
         Session session= sessionF.openSession();
         String hql = "FROM D";
         Query query = session.createQuery(hql);
-        List results = query.list();
+        List<D> results = (List<D>)query.list();
         session.close();
         return results;
     }
-    public static List listarB(String cliente){
+    public static List<B> listarB(String cliente){
         SessionFactory sessionF = NewHibernateUtil.getSessionFactory();
         Session session= sessionF.openSession();
-        String hql = "FROM B where C="+cliente;
+        String hql = "FROM B where cliente='"+cliente+"'";
         Query query = session.createQuery(hql);
-        List results = query.list();
+        List<B> results = (List<B>)query.list();
         session.close();
         return results;
     }
 
-    public static List listarCOrden(int tipo){
+    public static List<C> listarCOrden(int tipo){
         SessionFactory sessionF = NewHibernateUtil.getSessionFactory();
         Session session= sessionF.openSession();
         String hql;
@@ -162,7 +147,7 @@ public class Operacion {
         else
             hql = "FROM C ORDER BY nombre ASC";
         Query query = session.createQuery(hql);
-        List results = query.list();
+        List<C> results = (List<C>)query.list();
         session.close();
         return results;
     }
@@ -172,25 +157,20 @@ public class Operacion {
         Session session= sessionF.openSession();
         String hql = "FROM A where nombre= '"+nombre+"' and codigo = '"+codigo+"'";
         Query query = session.createQuery(hql);
-        List result = query.list();
+        List<A> result = (List<A>)query.list();
         session.close();
         if ((result == null) || (result.isEmpty())) {
             return null;
         } else {
-            A cliente;
-            for (Iterator it = result.iterator(); it.hasNext();) {
-                cliente = (A)it.next();
-                return cliente;
-            }
+            return result.get(0);
         }
-        return null;
     }
-    public static List filtrarD(String filtardo){
+    public static List<D> filtrarD(String filtardo){
         SessionFactory sessionF = NewHibernateUtil.getSessionFactory();
         Session session= sessionF.openSession();
         String hql = "FROM D where nombre like %"+filtardo+"%";
         Query query = session.createQuery(hql);
-        List results = query.list();
+        List<D> results = (List<D>)query.list();
         session.close();
         return results;
     }
