@@ -40,9 +40,9 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-reverse-engineering>
-  <schema-selection match-catalog="postgres" match-schema="public"/>
-  <table-filter match-name="c"/>
-  <table-filter match-name="b"/>
-  <table-filter match-name="a"/>
-  <table-filter match-name="d"/>
+  <schema-selection match-schema="VOLO"/>
+  <table-filter match-name="D"/>
+  <table-filter match-name="B"/>
+  <table-filter match-name="A"/>
+  <table-filter match-name="C"/>
 </hibernate-reverse-engineering>

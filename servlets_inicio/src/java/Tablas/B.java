@@ -1,5 +1,5 @@
 package Tablas;
-// Generated 26-feb-2020 20:48:27 by Hibernate Tools 4.3.1
+// Generated 27-feb-2020 16:03:43 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -11,9 +11,9 @@ public class B  implements java.io.Serializable {
 
 
      private int numerot;
-     private A a;
-     private C c;
-     private D d;
+     private String cliente;
+     private String producto;
+     private Integer lugar;
      private Integer cantidad;
      private Date fecha;
      private Boolean estado;
@@ -25,11 +25,11 @@ public class B  implements java.io.Serializable {
     public B(int numerot) {
         this.numerot = numerot;
     }
-    public B(int numerot, A a, C c, D d, Integer cantidad, Date fecha, Boolean estado) {
+    public B(int numerot, String cliente, String producto, Integer lugar, Integer cantidad, Date fecha, Boolean estado) {
        this.numerot = numerot;
-       this.a = a;
-       this.c = c;
-       this.d = d;
+       this.cliente = cliente;
+       this.producto = producto;
+       this.lugar = lugar;
        this.cantidad = cantidad;
        this.fecha = fecha;
        this.estado = estado;
@@ -42,26 +42,26 @@ public class B  implements java.io.Serializable {
     public void setNumerot(int numerot) {
         this.numerot = numerot;
     }
-    public A getA() {
-        return this.a;
+    public String getCliente() {
+        return this.cliente;
     }
     
-    public void setA(A a) {
-        this.a = a;
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
-    public C getC() {
-        return this.c;
-    }
-    
-    public void setC(C c) {
-        this.c = c;
-    }
-    public D getD() {
-        return this.d;
+    public String getProducto() {
+        return this.producto;
     }
     
-    public void setD(D d) {
-        this.d = d;
+    public void setProducto(String producto) {
+        this.producto = producto;
+    }
+    public Integer getLugar() {
+        return this.lugar;
+    }
+    
+    public void setLugar(Integer lugar) {
+        this.lugar = lugar;
     }
     public Integer getCantidad() {
         return this.cantidad;

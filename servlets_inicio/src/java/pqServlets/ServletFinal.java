@@ -48,19 +48,19 @@ public class ServletFinal extends HttpServlet {
                 else{
                     Operacion.setCliente(usuario);
                     request.getRequestDispatcher("Base.html").include(request, response);
-                    out.println("<h1>"+usuario.getNombre()+"<h1>");
-                    out.println("<table class='table table-striped table-bordered text-center shadow'><thead class='thead-dark'><tr><th>Número</th><th>Producto</th><th>Lugar</th><th>Cantidad</th><th>Fecha</th><th>Estado</th></tr></thead>");
-                    List transaccionesUsuario=Operacion.listarB(usuario.getId());
+                    out.println("<h1>"+usuario.getNombre()+"</h1>");
+                    out.println("<table class='table table-striped table-bordered text-center shadow'><thead class='thead-dark'><tr><th>Número</th><th>Producto</th><th>Lugar</th><th>Cantidad</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>");
+                    List<B> transaccionesUsuario=Operacion.listarB(usuario.getId());
                     B cliente;
                     for (Iterator it = transaccionesUsuario.iterator(); it.hasNext();) {
                         cliente = (B)it.next();
-                        out.println("<tr><td>"+cliente.getNumerot()+"</td><td>"+cliente.getC()+"</td><td>"+cliente.getD()+"</td><td>"+cliente.getCantidad()+"</td><td>"+cliente.getFecha()+"</td><td>");
+                        out.println("<tr><td>"+cliente.getNumerot()+"</td><td>"+cliente.getProducto()+"</td><td>"+cliente.getLugar()+"</td><td>"+cliente.getCantidad()+"</td><td>"+cliente.getFecha()+"</td><td>");
                         if (!cliente.getEstado()){
                             out.println("<form action='ServletFinal' method='post' id='ModificarTransaccion' name='ModificarTransaccion'><input type='hidden' name='Format' value='M-"+cliente.getNumerot()+"'><button type='submit'>Modificar</button></form>");
                         }
                         out.println("</td></tr>");
                     }
-                    out.println("</table><br>");
+                    out.println("</tbody></table><br>");
                     out.println("<form action='ServletFinal' method='post' id='FormTransaccion' name='FormTransaccion'>"+
                             "<label for='place'>Lugar de compra: <input type='text' id='place' name='place' placeholder='Lugar'/></label><br>"+///OPTION
                         "<label for='product'>Producto: <input type='text' id='product' name='product' placeholder='Producto'/></label><br>"+
@@ -122,7 +122,7 @@ public class ServletFinal extends HttpServlet {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 //surround below line with try catch block as below code throws checked exception
                 Date f = sdf.parse(startDateStr);
-                Operacion.modificarTransaccion(new B( Operacion.getModificado().getNumerot(), Operacion.getCliente(), Operacion.conseguirC(request.getParameter("product")), Operacion.conseguirD(Integer.valueOf(request.getParameter("place"))), Integer.valueOf(request.getParameter("amount")), f,Boolean.valueOf(request.getParameter("estado"))));
+                Operacion.modificarTransaccion(new B( Operacion.getModificado().getNumerot(), Operacion.getCliente().getId(), Operacion.conseguirC(request.getParameter("product")).getNombre(), Operacion.conseguirD(Integer.valueOf(request.getParameter("place"))).getNumero(), Integer.valueOf(request.getParameter("amount")), f,Boolean.valueOf(request.getParameter("estado"))));
                 processRequestBase(request, response);
             }else{
                 JOptionPane.showMessageDialog(null, "Ocurrio un error");
@@ -163,7 +163,7 @@ public class ServletFinal extends HttpServlet {
                     B cliente;
                     for (Iterator it = transaccionesUsuario.iterator(); it.hasNext();) {
                         cliente = (B)it.next();
-                        out.println("<tr><td>"+cliente.getNumerot()+"</td><td>"+cliente.getC()+"</td><td>"+cliente.getD()+"</td><td>"+cliente.getCantidad()+"</td><td>"+cliente.getFecha()+"</td><td>");
+                        out.println("<tr><td>"+cliente.getNumerot()+"</td><td>"+cliente.getProducto()+"</td><td>"+cliente.getLugar()+"</td><td>"+cliente.getCantidad()+"</td><td>"+cliente.getFecha()+"</td><td>");
                         if (!cliente.getEstado()){
                             out.println("<form action='ServletFinal' method='post' id='ModificarTransaccion' name='ModificarTransaccion'><input type='hidden' name='Format' value='M-"+cliente.getNumerot()+"'><button type='submit'>Modificar</button></form>");
                         }
@@ -244,6 +244,7 @@ public class ServletFinal extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try{
         
         char primero = request.getParameter("Format").charAt(0);
         switch (primero){
@@ -254,6 +255,9 @@ public class ServletFinal extends HttpServlet {
             case 'H': processRequestHibernate(request, response); break;
             case 'O': processRequestBase(request, response); break;
             default: processRequestExit(request, response); break;
+        }
+        }catch(Exception ex){
+            processRequestExit(request, response);
         }
     }
 

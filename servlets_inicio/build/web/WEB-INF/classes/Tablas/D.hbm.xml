@@ -1,27 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26-feb-2020 20:48:27 by Hibernate Tools 4.3.1 -->
+<!-- Generated 27-feb-2020 16:03:44 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Tablas.D" table="d" schema="public" optimistic-lock="version">
+    <class name="Tablas.D" table="D" schema="VOLO" optimistic-lock="version">
         <id name="numero" type="int">
-            <column name="numero" />
+            <column name="NUMERO" />
             <generator class="assigned" />
         </id>
         <property name="nombre" type="string">
-            <column name="nombre" length="30" />
+            <column name="NOMBRE" length="30" />
         </property>
         <property name="lugar" type="string">
-            <column name="lugar" length="30" />
+            <column name="LUGAR" length="30" />
         </property>
         <property name="valor" type="java.lang.Integer">
-            <column name="valor" />
+            <column name="VALOR" />
         </property>
-        <set name="bs" table="b" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="lugar" />
-            </key>
-            <one-to-many class="Tablas.B" />
-        </set>
     </class>
 </hibernate-mapping>

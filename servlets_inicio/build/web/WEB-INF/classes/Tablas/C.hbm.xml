@@ -1,24 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26-feb-2020 20:48:27 by Hibernate Tools 4.3.1 -->
+<!-- Generated 27-feb-2020 16:03:44 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Tablas.C" table="c" schema="public" optimistic-lock="version">
+    <class name="Tablas.C" table="C" schema="VOLO" optimistic-lock="version">
         <id name="nombre" type="string">
-            <column name="nombre" length="30" />
+            <column name="NOMBRE" length="30" />
             <generator class="assigned" />
         </id>
         <property name="precio" type="java.lang.Integer">
-            <column name="precio" />
+            <column name="PRECIO" />
         </property>
         <property name="imagen" type="string">
-            <column name="imagen" length="30" />
+            <column name="IMAGEN" length="30" />
         </property>
-        <set name="bs" table="b" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="producto" length="30" />
-            </key>
-            <one-to-many class="Tablas.B" />
-        </set>
     </class>
 </hibernate-mapping>
