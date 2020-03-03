@@ -18,9 +18,6 @@ and open the template in the editor.
     <body>
         <div class="container-fluid">
             <h1>Inicio</h1>
-            <!-- 
-                INICIO
-            -->
             <p>
                 <script> document.write(new Date().toLocaleDateString()); </script>
             </p>
@@ -28,20 +25,12 @@ and open the template in the editor.
                 Autor: Volodymyr Molchkov Volkogon
             </p>
             <form action="ServletFinal" method="post" id="FormNInicioPost" name="FormNInicioPost">
-                <label for="nombre">Tu nombre: <input type="text" id="nombre" name="nombre" placeholder="tu nombre aquí..."/></label><br>
-                <label for="codigo">Codigo: <input type="text" id="codigo" name="codigo" placeholder="codigo..."/></label><br>
+                <label for="nombre">Tu nombre: <input type="text" id="nombre" name="nombre" placeholder="nombre"/></label><br>
+                <label for="codigo">Codigo: <input type="text" id="codigo" name="codigo" placeholder="codigo"/></label><br>
                 <button type="submit">Enviar</button>
                 <input type="hidden" name="Format" value="Inicio">
             </form>
 
-            <!-- 
-                Cambiar forma de buscar
-
-            <form action="ServletNombre" method="post" id="Buscar" name="Buscar">
-                <button type="submit">Modificar</button>
-                <input type="hidden" name="Format" value="B1">
-            </form>
-            -->
         </div>
     </body>
 </html>

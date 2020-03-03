@@ -1,5 +1,8 @@
---Tabla A
+drop table b;
 drop table a;
+drop table c;
+drop table d;
+--Tabla A
 create table a (
 	id 			varchar(20),
 	nombre 		varchar(40),
@@ -13,7 +16,6 @@ insert into a values('AB9012BA', 'Paul', 'Mo');
 insert into a values('AB0001BA', 'Norman', 'Po');
 	
 --Tabla C
-drop table c;
 create table c (
 	nombre 		varchar(30),
 	precio 		integer,
@@ -27,7 +29,6 @@ insert into c values('Traje', 1234567,'img4');
 insert into c values('Gafas', 4000,'img5');
 
 --Tabla D
-drop table d;
 create table d (
 	numero 		INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	nombre		varchar(30),
@@ -41,7 +42,6 @@ insert into d (nombre,lugar,valor) values( 'A.B. Global', 'Japan', 7);
 insert into d (nombre,lugar,valor) values( 'A.B. Development', 'Italy', 5);
 
 --Tabla B
-drop table b;
 create table b (
 	numerot 	INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	cliente		varchar(20),

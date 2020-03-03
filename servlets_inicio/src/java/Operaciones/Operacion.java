@@ -7,10 +7,8 @@ package Operaciones;
 
 import Hibernate.NewHibernateUtil;
 import Tablas.*;
-import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -57,7 +55,6 @@ public class Operacion {
         session.save(enviado);
         tx.commit();
         session.close();
-        JOptionPane.showMessageDialog(null, "Transaccion Insertada");
     }
     public static void modificarTransaccion(B nuevo){
         SessionFactory sessionF = NewHibernateUtil.getSessionFactory();
@@ -66,7 +63,6 @@ public class Operacion {
         session.update(nuevo);
         tx.commit();
         session.close();
-        JOptionPane.showMessageDialog(null, "Transaccion Modificada");
     }
     
     public static B conseguirModificable(int n, String cli){
@@ -138,11 +134,11 @@ public class Operacion {
         return results;
     }
 
-    public static List<C> listarCOrden(int tipo){
+    public static List<C> listarCOrden(String tipo){
         SessionFactory sessionF = NewHibernateUtil.getSessionFactory();
         Session session= sessionF.openSession();
         String hql;
-        if(tipo==1)
+        if("1".equals(tipo))
             hql = "FROM C ORDER BY precio DESC";
         else
             hql = "FROM C ORDER BY nombre ASC";
@@ -168,7 +164,7 @@ public class Operacion {
     public static List<D> filtrarD(String filtardo){
         SessionFactory sessionF = NewHibernateUtil.getSessionFactory();
         Session session= sessionF.openSession();
-        String hql = "FROM D where nombre like %"+filtardo+"%";
+        String hql = "FROM D where nombre like '%"+filtardo+"%'";
         Query query = session.createQuery(hql);
         List<D> results = (List<D>)query.list();
         session.close();

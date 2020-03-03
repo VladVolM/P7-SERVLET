@@ -18,7 +18,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -63,13 +62,12 @@ public class ServletFinal extends HttpServlet {
                 out.println("<form action='ServletFinal' method='post' id='FormTransaccion' name='FormTransaccion'>"+
                         "<label for='place'>Lugar de compra: <input type='text' id='place' name='place' placeholder='Lugar'/></label><br>"+///OPTION
                     "<label for='product'>Producto: <input type='text' id='product' name='product' placeholder='Producto'/></label><br>"+
-                    "<label for='amount'>Cantidad: <input type='text' id='amount' name='amount' placeholder='Cantidad'/></label><br><button type='submit'>Enviar</button><input type='hidden' name='Format' value='I'></form>");
+                    "<label for='amount'>Cantidad: <input type='text' id='amount' name='amount' placeholder='Cantidad'/></label><br><button type='submit'>Enviar</button><input type='hidden' name='Format' value='N'></form>");
 
                 out.println("</div></body></html>");// Cerrar el include
             }
             
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocurrio un error");
             processRequestExit(request, response);
         }
         
@@ -80,17 +78,17 @@ public class ServletFinal extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             if (Operacion.getCliente()!=null){
                 String fo= request.getParameter("Format");
-                int transa = Integer.valueOf(fo.substring(2, fo.length()-1));
+                int transa = Integer.valueOf(fo.substring(2));
                 B aModificar = Operacion.conseguirModificable(transa, Operacion.getCliente().getId());
                 Operacion.setPresente(aModificar);
                 if (!(aModificar==null)){
                     request.getRequestDispatcher("Base.html").include(request, response);
                     A usuario = Operacion.getCliente();
                     out.println("<h1>"+usuario.getNombre()+"</h1>");
-                    out.println("<form action='ServletNombre' method='post' id='ReemplazoTransaccion' name='ReemplazoTransaccion'><label>Numero: "+aModificar.getNumerot()+"</label><br><label>Cliente: "+Operacion.getCliente().getNombre()+"</label><br>"+
-                            "<label for='place'>Lugar de compra: <input type='text' id='place' name='place' placeholder='Lugar'/></label><br>"+
-                        "<label for='product'>Producto: <input type='text' id='product' name='product' placeholder='Producto'/></label><br>"+
-                        "<label for='amount'>Cantidad: <input type='text' id='amount' name='amount' placeholder='Cantidad'/></label><br><label for='fecha'>Fecha: <input type='date' id='fecha' name='fecha'/></label><br><label>Estado:</label><br>");
+                    out.println("<form action='ServletFinal' method='post' id='ReemplazoTransaccion' name='ReemplazoTransaccion'><label>Numero: "+aModificar.getNumerot()+"</label><br><label>Cliente: "+Operacion.getCliente().getNombre()+"</label><br>"+
+                            "<label for='place'>Lugar de compra: <input type='text' id='place' name='place' value='"+aModificar.getLugar()+"'/></label><br>"+
+                        "<label for='product'>Producto: <input type='text' id='product' name='product' value='"+aModificar.getProducto()+"'/></label><br>"+
+                        "<label for='amount'>Cantidad: <input type='text' id='amount' name='amount' value='"+aModificar.getCantidad()+"'/></label><br><label for='fecha'>Fecha: <input type='date' id='fecha' name='fecha' value='"+aModificar.getFecha().toString()+"'/></label><br><label>Estado:</label><br>");
                     if (aModificar.getEstado())
                         out.println("<label for='EstadoYes'><input type='radio' id='EstadoYes' name='estado' value='true' checked/>Yes</label><br><label for='EstadoNo'><input type='radio' id='EstadoNo' name='estado' value='false' />No</label><br>");
                     else
@@ -99,14 +97,12 @@ public class ServletFinal extends HttpServlet {
                     
                     out.println("</div></body></html>");// Cerrar el include
                 }else{
-                    JOptionPane.showMessageDialog(null, "Ocurrio un error");
                     processRequestExit(request, response);
                 }
                 
             }else
                 processRequestExit(request, response);
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocurrio un error");
             processRequestExit(request, response);
         }
     }
@@ -116,18 +112,15 @@ public class ServletFinal extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             if (Operacion.getCliente()!=null){
                 String startDateStr = request.getParameter("fecha");
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                //surround below line with try catch block as below code throws checked exception
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 Date f = sdf.parse(startDateStr);
-                Operacion.modificarTransaccion(new B( Operacion.getModificado().getNumerot(), Operacion.getCliente().getId(), Operacion.conseguirC(request.getParameter("product")).getNombre(), Operacion.conseguirD(Integer.valueOf(request.getParameter("place"))).getNumero(), Integer.valueOf(request.getParameter("amount")), f,Boolean.valueOf(request.getParameter("estado"))));
+                Operacion.modificarTransaccion(new B( Operacion.getPresente().getNumerot(),Operacion.getCliente().getId() , Operacion.conseguirC(request.getParameter("product")).getNombre(), Operacion.conseguirD(Integer.valueOf(request.getParameter("place"))).getNumero(), Integer.valueOf(request.getParameter("amount")), f ,Boolean.valueOf(request.getParameter("estado"))));
                 processRequestBase(request, response);
             }else{
-                JOptionPane.showMessageDialog(null, "Ocurrio un error");
                 processRequestExit(request, response);
             }
    
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocurrio un error");
             processRequestExit(request, response);
         }
     }
@@ -135,16 +128,52 @@ public class ServletFinal extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletFinal</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletFinal at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            //request.getRequestDispatcher("Base.html").include(request, response);
-            out.println("</html>");
+            if (Operacion.getCliente()!=null){
+                    request.getRequestDispatcher("Base.html").include(request, response);
+                    out.println("<form action='ServletFinal' method='post' id='Buscar' name='Buscar'><label for='search'>Buscar:<input type='text' id='search' name='search'/></label><br><label for='orden1'><input type='radio' id='orden1' name='orden' value='1' />Precio</label><br><label for='orden2'><input type='radio' id='orden2' name='orden' value='2' checked/>Nombre</label><br><label for='orden2'><input type='radio' id='orden3' name='orden' value='0' checked/>Ninguno</label><br><button type='submit'>Buscar</button><input type='hidden' name='Format' value='B'></form>");
+                        
+                    out.println("<table class='table table-striped table-bordered text-center shadow'><thead class='thead-dark'><tr><th>Número</th><th>Nombre</th><th>Lugar</th><th>Valor</th></tr></thead><tbody>");
+                    String search = request.getParameter("search");
+                    List lugares;
+                    if (search==null || search.length()==0){
+                        lugares=Operacion.listarD();
+                    }else{
+                        lugares=Operacion.filtrarD(search);
+                    }
+                    D lug;
+                    for (Iterator it = lugares.iterator(); it.hasNext();) {
+                        lug = (D)it.next();
+                        out.println("<tr><td>"+lug.getNumero()+"</td><td>"+lug.getNombre()+"</td><td>"+lug.getLugar()+"</td><td>"+lug.getValor()+"</td>");
+                        
+                        out.println("</tr>");
+                    }
+                    out.println("</tbody></table><br>");
+                    
+                    out.println("<section class='container-fluid'>");
+                    String orden = request.getParameter("orden");
+                    List productos;
+                    if ("0".equals(orden) || orden==null){
+                        productos=Operacion.listarC();
+                    }else{
+                        productos=Operacion.listarCOrden(orden);
+                    }
+                    C pro;
+                    for (Iterator it = productos.iterator(); it.hasNext();) {
+                        pro = (C)it.next();
+                        out.println("<article style='Border:2px;border-style: solid; border-color: black; display:inline-block;width: 10%;'>");
+                        out.println("<p>"+pro.getNombre()+"</p><br><p>"+pro.getPrecio()+"</p><br><img src='"+pro.getImagen()+".jpg' alt='Image' height='20' width='20'>");
+                        
+                        out.println("</article>");
+                    }
+                    out.println("</section><br>");
+                    
+                    out.println("</div></body></html>");// Cerrar el include
+                
+            }else{
+                processRequestExit(request, response);
+            }
+        }catch(Exception ex){
+            processRequestExit(request, response);
         }
     }
     protected void processRequestBase(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -170,7 +199,7 @@ public class ServletFinal extends HttpServlet {
                     out.println("<form action='ServletFinal' method='post' id='FormTransaccion' name='FormTransaccion'>"+
                             "<label for='place'>Lugar de compra: <input type='text' id='place' name='place' placeholder='Lugar'/></label><br>"+///OPTION
                         "<label for='product'>Producto: <input type='text' id='product' name='product' placeholder='Producto'/></label><br>"+
-                        "<label for='amount'>Cantidad: <input type='text' id='amount' name='amount' placeholder='Cantidad'/></label><br><button type='submit'>Enviar</button><input type='hidden' name='Format' value='I'></form>");
+                        "<label for='amount'>Cantidad: <input type='text' id='amount' name='amount' placeholder='Cantidad'/></label><br><button type='submit'>Enviar</button><input type='hidden' name='Format' value='N'></form>");
 
                     out.println("</div></body></html>");// Cerrar el include
                 
@@ -178,7 +207,6 @@ public class ServletFinal extends HttpServlet {
                 processRequestExit(request, response);
             }
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocurrio un error");
             processRequestExit(request, response);
         }
     }
@@ -200,7 +228,6 @@ public class ServletFinal extends HttpServlet {
                 processRequestExit(request, response);
             }
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocurrio un error");
             processRequestExit(request, response);
         }
     }
@@ -214,6 +241,29 @@ public class ServletFinal extends HttpServlet {
             response.setHeader("Pragma", "no-cache");
             response.setHeader("Expires", "0");*/
             request.getRequestDispatcher("index.html").include(request, response);
+        }
+    }
+    
+    protected void processRequestInsertar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            if (Operacion.getCliente()!=null){
+                B insertado = new B();
+                insertado.setCliente(Operacion.getCliente().getId());
+                insertado.setProducto(Operacion.conseguirC(request.getParameter("product")).getNombre());
+                insertado.setLugar(Operacion.conseguirD(Integer.valueOf(request.getParameter("place"))).getNumero());
+                insertado.setCantidad(Integer.valueOf(request.getParameter("amount")));
+                insertado.setFecha(new Date());
+                insertado.setEstado(Boolean.FALSE);
+                Operacion.altaTransaccion(insertado);
+                processRequestBase(request, response);
+            }else{
+                processRequestExit(request, response);
+            }
+   
+        }catch(Exception ex){
+            processRequestExit(request, response);
         }
     }
     
@@ -254,12 +304,13 @@ public class ServletFinal extends HttpServlet {
         
         char primero = request.getParameter("Format").charAt(0);
         switch (primero){
-            case 'I': processLimpiar(request, response); processRequestInicio(request, response); break;
-            case 'M': processLimpiar(request, response); processRequestModificar(request, response); break;
-            case 'R': processLimpiar(request, response); processRequestRemplazar(request, response); break;
-            case 'B': processLimpiar(request, response); processRequestBuscar(request, response); break;
-            case 'H': processLimpiar(request, response); processRequestHibernate(request, response); break;
-            case 'O': processLimpiar(request, response); processRequestBase(request, response); break;
+            case 'I': processLimpiar(request, response);processRequestInicio(request, response); break;
+            case 'M': processLimpiar(request, response);processRequestModificar(request, response); break;
+            case 'R': processLimpiar(request, response);processRequestRemplazar(request, response); break;
+            case 'B': processLimpiar(request, response);processRequestBuscar(request, response); break;
+            case 'H': processLimpiar(request, response);processRequestHibernate(request, response); break;
+            case 'O': processLimpiar(request, response);processRequestBase(request, response); break;
+            case 'N': processLimpiar(request, response);processRequestInsertar(request, response); break;
             default: processRequestExit(request, response); break;
         }
         }catch(Exception ex){

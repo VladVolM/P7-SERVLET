@@ -46,9 +46,9 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:derby://localhost:1527/BaseV</property>
     <property name="hibernate.connection.username">Volo</property>
     <property name="hibernate.connection.password">Volo</property>
-    <mapping resource="Tablas/A.hbm.xml"/>
-    <mapping resource="Tablas/C.hbm.xml"/>
     <mapping resource="Tablas/D.hbm.xml"/>
+    <mapping resource="Tablas/C.hbm.xml"/>
+    <mapping resource="Tablas/A.hbm.xml"/>
     <mapping resource="Tablas/B.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

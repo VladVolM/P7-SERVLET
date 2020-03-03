@@ -41,8 +41,8 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-schema="VOLO"/>
-  <table-filter match-name="D"/>
-  <table-filter match-name="B"/>
-  <table-filter match-name="A"/>
   <table-filter match-name="C"/>
+  <table-filter match-name="D"/>
+  <table-filter match-name="A"/>
+  <table-filter match-name="B"/>
 </hibernate-reverse-engineering>

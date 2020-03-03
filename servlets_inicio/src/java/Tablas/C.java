@@ -1,5 +1,5 @@
 package Tablas;
-// Generated 27-feb-2020 16:03:43 by Hibernate Tools 4.3.1
+// Generated Mar 2, 2020 7:35:40 PM by Hibernate Tools 4.3.1
 
 
 
